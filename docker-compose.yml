@@ -15,38 +15,38 @@ services:
       - "5432:5432"
     container_name: db
 
-  backend:
-    image: node
-    depends_on:
-      - postgres
-    restart: on-failure
-    volumes:
-      - ./backend:/home/node/app
+  # backend:
+  #   image: node
+  #   depends_on:
+  #     - postgres
+  #   restart: on-failure
+  #   volumes:
+  #     - ./backend:/home/node/app
 
-    env_file:
-      - .env    
-    ports:
-      - "3000:3000"
-    container_name: backend
-    working_dir: /home/node/app
-    user: node
-    entrypoint: ["bash" , "-c" , "npm install && npm run start:dev"]
+  #   env_file:
+  #     - .env    
+  #   ports:
+  #     - "3000:3000"
+  #   container_name: backend
+  #   working_dir: /home/node/app
+  #   user: node
+  #   entrypoint: ["bash" , "-c" , "npm install && npm run start:dev"]
 
-  frontend:
-    image: node
-    restart: on-failure
-    environment:
-      - VUE_APP_BACKEND_URL=${BACKEND_URL}
-    volumes:
-      - ./frontend:/home/node/app
-    ports:
-      - '5173:5173'
-    container_name: frontend
-    depends_on:
-      - backend
-    user: node
-    working_dir: /home/node/app
-    entrypoint: ["bash" , "-c" , "npm install && npm run dev"]
+  # frontend:
+  #   image: node
+  #   restart: on-failure
+  #   environment:
+  #     - VUE_APP_BACKEND_URL=${BACKEND_URL}
+  #   volumes:
+  #     - ./frontend:/home/node/app
+  #   ports:
+  #     - '5173:5173'
+  #   container_name: frontend
+  #   depends_on:
+  #     - backend
+  #   user: node
+  #   working_dir: /home/node/app
+  #   entrypoint: ["bash" , "-c" , "npm install && npm run dev"]
 
 networks:
   transcendence:
@@ -54,7 +54,7 @@ networks:
 
 volumes:
   v_db:
-    driver_opts:
-      type: none
-      o: bind
-      device: ${DB_VOL_LOC}
+    # driver_opts:
+    #   type: none
+    #   o: bind
+    #   device: ${DB_VOL_LOC}
