@@ -1,19 +1,37 @@
 <template>
-  <header v-if="islogged">
-    <nav>
-      <RouterLink to="/">Pong</RouterLink>
-      <RouterLink to="/chat">Chat</RouterLink>
-      <RouterLink to="/leaderboard">Leaderboard</RouterLink>
-      <RouterLink to="/profile">User profile</RouterLink>
-    </nav>
-  </header>
-  <div v-if="islogged">
-    <RouterView />
-  </div>
-  <div v-else>
-    <Login  @clicked42="login42" @clickedgoogle="loginGoogle" @clickedBYPASS="loginBYPASS" @id_to_login="executeLoginwithId" />
-  </div>
-</template>
+	<v-card>
+		<v-layout>
+	    <v-navigation-drawer v-if="islogged" app
+				expand-on-hover
+				rail
+			>
+				<v-list>
+      	    <v-list-item
+      	      prepend-avatar="https://randomuser.me/api/portraits/women/85.jpg"
+      	      title="Sandra Adams"
+      	      subtitle="sandra_a88@gmailcom"
+      	    ></v-list-item>
+      	</v-list>
+				<v-divider></v-divider>
+		  	<v-list density="compact" nav>
+		  		<v-list-item prepend-icon="mdi-home" title="Pong" to="/"></v-list-item>
+		  	  <v-list-item prepend-icon="mdi-chat" title="Chat" to="/chat"></v-list-item>
+					<v-list-item prepend-icon="mdi-account-multiple" title="Leaderboard" to="/leaderboard"></v-list-item>
+					<v-list-item prepend-icon="mdi-account" title="User Profile" to="/profile"></v-list-item>
+		  	</v-list>
+	    </v-navigation-drawer>
+			
+			<v-main v-if="islogged">
+				<router-view />
+			</v-main>
+			
+			<v-main v-else>
+				<Login @clicked42="login42" @clickedgoogle="loginGoogle" @clickedBYPASS="loginBYPASS" @id_to_login="executeLoginwithId" />
+			</v-main>
+			</v-layout>
+		</v-card>
+  </template>
+  
 
 <script setup lang="ts">
 
